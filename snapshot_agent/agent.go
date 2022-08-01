@@ -9,6 +9,7 @@ import (
 	"os"
 	"path"
 	"time"
+	"io/ioutil"
 
 	"cloud.google.com/go/storage"
 	"github.com/Azure/azure-storage-blob-go/azblob"
@@ -101,7 +102,7 @@ func (s *Snapshotter) SetClientTokenFromK8sAuth(config *config.Configuration) er
 		return errors.New("missing k8s auth definitions")
 	}
 
-	jwt, err := os.ReadFile("/var/run/secrets/kubernetes.io/serviceaccount/token")
+	jwt, err := ioutil.ReadFile("/var/run/secrets/kubernetes.io/serviceaccount/token")
 	if err != nil {
 		return err
 	}
